@@ -1,0 +1,835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ForeignLanguageSchoolDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="IdClass" />
+          </Key>
+          <Property Name="IdClass" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassTime" Type="time" Precision="2" Nullable="false" />
+          <Property Name="ClassDate" Type="date" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="HomeworkLink" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ClassesClients">
+          <Key>
+            <PropertyRef Name="IdClassClient" />
+          </Key>
+          <Property Name="IdClassClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="IsClientWasOnClass" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientSurname" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientPatronymic" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientEmail" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientPhone" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientBirthDate" Type="date" Nullable="false" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="ClientPhotoLink" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientUniqueInfo" Type="nvarchar" MaxLength="3000" />
+          <Property Name="ClientPassword" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ClientLogin" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="IdCourse" />
+          </Key>
+          <Property Name="IdCourse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="CourseDescription" Type="nvarchar" MaxLength="3000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="IdGender" />
+          </Key>
+          <Property Name="IdGender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="IdGroup" />
+          </Key>
+          <Property Name="IdGroup" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CourseId" Type="int" />
+        </EntityType>
+        <EntityType Name="GroupsClients">
+          <Key>
+            <PropertyRef Name="IdGroupClient" />
+          </Key>
+          <Property Name="IdGroupClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="IdMessage" />
+          </Key>
+          <Property Name="IdMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageMessage" Type="nchar" MaxLength="3000" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="IdReview" />
+          </Key>
+          <Property Name="IdReview" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReviewMessage" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ReviewRating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserPatronymic" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserSurname" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersTypes">
+          <Key>
+            <PropertyRef Name="IdUserType" />
+          </Key>
+          <Property Name="IdUserType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTypeName" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Classes_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="IdGroup" />
+            </Principal>
+            <Dependent Role="Classes">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassesClients_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="ClassesClients" Type="Self.ClassesClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="IdClass" />
+            </Principal>
+            <Dependent Role="ClassesClients">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassesClients_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClassesClients" Type="Self.ClassesClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="ClassesClients">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="IdGender" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="IdCourse" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupsClients_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="GroupsClients" Type="Self.GroupsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="GroupsClients">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupsClients_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="GroupsClients" Type="Self.GroupsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="IdGroup" />
+            </Principal>
+            <Dependent Role="GroupsClients">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UsersTypes">
+          <End Role="UsersTypes" Type="Self.UsersTypes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTypes">
+              <PropertyRef Name="IdUserType" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ForeignLanguageSchoolDBModelContainer">
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassesClients" EntityType="Self.ClassesClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupsClients" EntityType="Self.GroupsClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersTypes" EntityType="Self.UsersTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Classes_Groups" Association="Self.FK_Classes_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Classes" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassesClients_Classes" Association="Self.FK_ClassesClients_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassesClients" EntitySet="ClassesClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassesClients_Clients" Association="Self.FK_ClassesClients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClassesClients" EntitySet="ClassesClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Genders" Association="Self.FK_Clients_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Courses" Association="Self.FK_Groups_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Users" Association="Self.FK_Groups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupsClients_Clients" Association="Self.FK_GroupsClients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="GroupsClients" EntitySet="GroupsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupsClients_Groups" Association="Self.FK_GroupsClients_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupsClients" EntitySet="GroupsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Clients" Association="Self.FK_Messages_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users" Association="Self.FK_Messages_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Clients" Association="Self.FK_Reviews_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UsersTypes" Association="Self.FK_Users_UsersTypes">
+            <End Role="UsersTypes" EntitySet="UsersTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ForeignLanguageSchoolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="IdClass" />
+          </Key>
+          <Property Name="IdClass" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassTime" Type="Time" Nullable="false" Precision="2" />
+          <Property Name="ClassDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="HomeworkLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Classes_Groups" FromRole="Classes" ToRole="Groups" />
+          <NavigationProperty Name="ClassesClients" Relationship="Self.FK_ClassesClients_Classes" FromRole="Classes" ToRole="ClassesClients" />
+        </EntityType>
+        <EntityType Name="ClassesClients">
+          <Key>
+            <PropertyRef Name="IdClassClient" />
+          </Key>
+          <Property Name="IdClassClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="IsClientWasOnClass" Type="Byte" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_ClassesClients_Classes" FromRole="ClassesClients" ToRole="Classes" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_ClassesClients_Clients" FromRole="ClassesClients" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientSurname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientPatronymic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientPhone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientBirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="ClientPhotoLink" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientUniqueInfo" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="ClientPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientLogin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClassesClients" Relationship="Self.FK_ClassesClients_Clients" FromRole="Clients" ToRole="ClassesClients" />
+          <NavigationProperty Name="Genders" Relationship="Self.FK_Clients_Genders" FromRole="Clients" ToRole="Genders" />
+          <NavigationProperty Name="GroupsClients" Relationship="Self.FK_GroupsClients_Clients" FromRole="Clients" ToRole="GroupsClients" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Clients" FromRole="Clients" ToRole="Messages" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Clients" FromRole="Clients" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="IdCourse" />
+          </Key>
+          <Property Name="IdCourse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CourseDescription" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Courses" FromRole="Courses" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="IdGender" />
+          </Key>
+          <Property Name="IdGender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Genders" FromRole="Genders" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="IdGroup" />
+          </Key>
+          <Property Name="IdGroup" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CourseId" Type="Int32" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_Classes_Groups" FromRole="Groups" ToRole="Classes" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Groups_Courses" FromRole="Groups" ToRole="Courses" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Groups_Users" FromRole="Groups" ToRole="Users" />
+          <NavigationProperty Name="GroupsClients" Relationship="Self.FK_GroupsClients_Groups" FromRole="Groups" ToRole="GroupsClients" />
+        </EntityType>
+        <EntityType Name="GroupsClients">
+          <Key>
+            <PropertyRef Name="IdGroupClient" />
+          </Key>
+          <Property Name="IdGroupClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_GroupsClients_Clients" FromRole="GroupsClients" ToRole="Clients" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_GroupsClients_Groups" FromRole="GroupsClients" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="IdMessage" />
+          </Key>
+          <Property Name="IdMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageMessage" Type="String" MaxLength="3000" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Messages_Clients" FromRole="Messages" ToRole="Clients" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="IdReview" />
+          </Key>
+          <Property Name="IdReview" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewMessage" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ReviewRating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Reviews_Clients" FromRole="Reviews" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLogin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPatronymic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserSurname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Users" FromRole="Users" ToRole="Groups" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
+          <NavigationProperty Name="UsersTypes" Relationship="Self.FK_Users_UsersTypes" FromRole="Users" ToRole="UsersTypes" />
+        </EntityType>
+        <EntityType Name="UsersTypes">
+          <Key>
+            <PropertyRef Name="IdUserType" />
+          </Key>
+          <Property Name="IdUserType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UsersTypes" FromRole="UsersTypes" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Classes_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="IdGroup" />
+            </Principal>
+            <Dependent Role="Classes">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassesClients_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="ClassesClients" Type="Self.ClassesClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="IdClass" />
+            </Principal>
+            <Dependent Role="ClassesClients">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClassesClients_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClassesClients" Type="Self.ClassesClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="ClassesClients">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="IdGender" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupsClients_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="GroupsClients" Type="Self.GroupsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="GroupsClients">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="IdCourse" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupsClients_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="GroupsClients" Type="Self.GroupsClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="IdGroup" />
+            </Principal>
+            <Dependent Role="GroupsClients">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UsersTypes">
+          <End Role="UsersTypes" Type="Self.UsersTypes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTypes">
+              <PropertyRef Name="IdUserType" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ForeignLanguageSchoolDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="Self.Classes" />
+          <EntitySet Name="ClassesClients" EntityType="Self.ClassesClients" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="GroupsClients" EntityType="Self.GroupsClients" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="UsersTypes" EntityType="Self.UsersTypes" />
+          <AssociationSet Name="FK_Classes_Groups" Association="Self.FK_Classes_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Classes" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassesClients_Classes" Association="Self.FK_ClassesClients_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassesClients" EntitySet="ClassesClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassesClients_Clients" Association="Self.FK_ClassesClients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClassesClients" EntitySet="ClassesClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Genders" Association="Self.FK_Clients_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupsClients_Clients" Association="Self.FK_GroupsClients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="GroupsClients" EntitySet="GroupsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Clients" Association="Self.FK_Messages_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Clients" Association="Self.FK_Reviews_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Courses" Association="Self.FK_Groups_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Users" Association="Self.FK_Groups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupsClients_Groups" Association="Self.FK_GroupsClients_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupsClients" EntitySet="GroupsClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users" Association="Self.FK_Messages_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UsersTypes" Association="Self.FK_Users_UsersTypes">
+            <End Role="UsersTypes" EntitySet="UsersTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ForeignLanguageSchoolDBModelContainer" CdmEntityContainer="ForeignLanguageSchoolDBEntities">
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Classes">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="IdClass" ColumnName="IdClass" />
+                <ScalarProperty Name="ClassTime" ColumnName="ClassTime" />
+                <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="HomeworkLink" ColumnName="HomeworkLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassesClients">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.ClassesClients">
+              <MappingFragment StoreEntitySet="ClassesClients">
+                <ScalarProperty Name="IdClassClient" ColumnName="IdClassClient" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsClientWasOnClass" ColumnName="IsClientWasOnClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="ClientSurname" ColumnName="ClientSurname" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientPatronymic" ColumnName="ClientPatronymic" />
+                <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+                <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+                <ScalarProperty Name="ClientBirthDate" ColumnName="ClientBirthDate" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="ClientPhotoLink" ColumnName="ClientPhotoLink" />
+                <ScalarProperty Name="ClientUniqueInfo" ColumnName="ClientUniqueInfo" />
+                <ScalarProperty Name="ClientPassword" ColumnName="ClientPassword" />
+                <ScalarProperty Name="ClientLogin" ColumnName="ClientLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Genders">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupsClients">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.GroupsClients">
+              <MappingFragment StoreEntitySet="GroupsClients">
+                <ScalarProperty Name="IdGroupClient" ColumnName="IdGroupClient" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Messages">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="IdMessage" ColumnName="IdMessage" />
+                <ScalarProperty Name="MessageMessage" ColumnName="MessageMessage" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Reviews">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="IdReview" ColumnName="IdReview" />
+                <ScalarProperty Name="ReviewMessage" ColumnName="ReviewMessage" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ReviewRating" ColumnName="ReviewRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPatronymic" ColumnName="UserPatronymic" />
+                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersTypes">
+            <EntityTypeMapping TypeName="ForeignLanguageSchoolDBModel.UsersTypes">
+              <MappingFragment StoreEntitySet="UsersTypes">
+                <ScalarProperty Name="IdUserType" ColumnName="IdUserType" />
+                <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
